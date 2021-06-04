@@ -1,0 +1,19 @@
+service: datahog
+
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  stage: dev
+  runtime: nodejs14.x
+  region: eu-west-1
+  lambdaHashingVersion: 20201221
+  environment:
+    NODE_OPTIONS: '--enable-source-maps=true'
+  
+plugins:
+  - serverless-plugin-typescript
+
+functions: {}
+
+resources: {}
