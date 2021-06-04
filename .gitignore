@@ -1,3 +1,4 @@
 .build
 .serverless
+coverage
 node_modules
