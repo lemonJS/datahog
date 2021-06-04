@@ -1,0 +1,7 @@
+Effect: Allow
+Action:
+  - logs:CreateLogGroup
+  - logs:CreateLogStream
+  - logs:PutLogEvents
+Resource:
+  - arn:aws:logs:eu-west-1:*:log-group:/aws/lambda/*:*:*

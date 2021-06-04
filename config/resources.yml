@@ -1,0 +1,8 @@
+Resources:
+  publisherRole: ${file(config/roles/publisher.yml)}
+  subscriberRole: ${file(config/roles/subscriber.yml)}
+
+  collectionsQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: collections

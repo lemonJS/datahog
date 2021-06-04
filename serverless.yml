@@ -14,6 +14,21 @@ provider:
 plugins:
   - serverless-plugin-typescript
 
-functions: {}
+functions:
+  publisher:
+    handler: functions/publisher/handler.handle
+    role: publisherRole
+    memorySize: 128
+    events:
+      - http:
+          path: /collect
+          method: post
 
-resources: {}
+  subscriber:
+    handler: functions/subscriber/handler.handle
+    role: subscriberRole
+    memorySize: 128
+    events:
+      - sqs: arn:aws:sqs:eu-west-1:404356446913:collections
+
+resources: ${file(config/resources.yml)}
