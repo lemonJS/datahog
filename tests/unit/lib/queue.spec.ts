@@ -4,6 +4,7 @@ import { stubSqsSendMessage } from '../../utils';
 import { Collection } from '../../../types/collection';
 
 const chance = Chance();
+const { COLLECTIONS_QUEUE_NAME } = process.env;
 
 describe('Queue', () => {
   const stub = jest.fn();
@@ -51,7 +52,7 @@ describe('Queue', () => {
       await Queue.add(collection as Collection);
 
       expect(stub).toHaveBeenCalledWith({
-        QueueUrl: process.env.COLLECTIONS_QUEUE_NAME as string,
+        QueueUrl: COLLECTIONS_QUEUE_NAME as string,
         MessageBody: JSON.stringify(collection),
         DelaySeconds: 10,
       });

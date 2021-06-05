@@ -5,5 +5,6 @@ export default async (): Promise<void> => {
   AWSMock.setSDKInstance(AWS);
 
   process.env.BACKOFF_MULTIPLIER = '10';
+  process.env.MAX_BACKOFF_ATTEMPTS = '10';
   process.env.COLLECTIONS_QUEUE_NAME = '__test__';
 };

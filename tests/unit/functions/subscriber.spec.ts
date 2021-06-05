@@ -5,6 +5,7 @@ import { Http } from '../../../lib/http';
 import { Queue } from '../../../lib/queue';
 
 const chance = Chance();
+const { MAX_BACKOFF_ATTEMPTS } = process.env;
 
 describe('Processing messages from the SQS queue', () => {
   describe('when the `handleBillCollection` method fails', () => {
@@ -34,7 +35,7 @@ describe('Processing messages from the SQS queue', () => {
     const collection = {
       provider: chance.pickone(['gas', 'electric']),
       callbackUrl: chance.url(),
-      attempt: 10,
+      attempt: Number(MAX_BACKOFF_ATTEMPTS),
     };
     
     const event = { Records: [{ body: JSON.stringify(collection) }] } as SQSEvent;

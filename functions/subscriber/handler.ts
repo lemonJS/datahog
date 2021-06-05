@@ -3,6 +3,8 @@ import { Queue } from '../../lib/queue';
 import { Http } from '../../lib/http';
 import type { Collection } from '../../types/collection';
 
+const { MAX_BACKOFF_ATTEMPTS } = process.env;
+
 /**
  * Pick events from the SQS queue and attempt to call the providers
  * API. If the request succeeds then no more action is taken. If the 
@@ -32,7 +34,7 @@ export const handle = async (event: SQSEvent): Promise<void> => {
       ? collection.attempt + 1 
       : 1;
 
-    if (collection.attempt > 10) { // TODO
+    if (collection.attempt > Number(MAX_BACKOFF_ATTEMPTS)) {
       throw new Error('Max attempts reached');
     }
     
