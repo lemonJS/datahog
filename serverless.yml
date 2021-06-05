@@ -29,6 +29,8 @@ functions:
     role: subscriberRole
     memorySize: 128
     events:
-      - sqs: arn:aws:sqs:eu-west-1:404356446913:collections
+      - sqs: 
+          arn: arn:aws:sqs:eu-west-1:404356446913:collections
+          batchSize: 1
 
 resources: ${file(config/resources.yml)}
