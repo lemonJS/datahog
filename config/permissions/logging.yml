@@ -4,4 +4,4 @@ Action:
   - logs:CreateLogStream
   - logs:PutLogEvents
 Resource:
-  - arn:aws:logs:eu-west-1:*:log-group:/aws/lambda/*:*:*
+  - arn:aws:logs:${self:custom.region}:${self:custom.accountId}:log-group:/aws/lambda/*:*:*

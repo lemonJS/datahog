@@ -1,6 +1,7 @@
 service: datahog
 
 frameworkVersion: '2'
+variablesResolutionMode: 20210326
 
 provider:
   name: aws
@@ -12,13 +13,15 @@ provider:
     NODE_OPTIONS: '--enable-source-maps=true'
     BACKOFF_MULTIPLIER: 90
     PROVIDER_API_BASE_URL: 'https://datahog.lemonjs.uk'
-    COLLECTIONS_QUEUE_NAME: https://sqs.eu-west-1.amazonaws.com/404356446913/collections
+    COLLECTIONS_QUEUE_NAME: https://sqs.eu-west-1.amazonaws.com/${self:custom.accountId}/collections
   
 plugins:
   - serverless-plugin-typescript
   - serverless-domain-manager
 
 custom:
+  accountId: ${file(deploy/account.js):getAccountId}
+  region: eu-west-1
   customDomain:
     domainName: datahog.lemonjs.uk
     apiType: rest
@@ -50,7 +53,7 @@ functions:
     memorySize: 128
     events:
       - sqs: 
-          arn: arn:aws:sqs:eu-west-1:404356446913:collections
+          arn: arn:aws:sqs:${self:custom.region}:${self:custom.accountId}:collections
           batchSize: 1
 
 resources: ${file(config/resources.yml)}

@@ -1,10 +1,10 @@
 Type: AWS::IAM::Role
 Properties:
   Path: /
-  RoleName: publisher-eu-west-1-lambda-role
+  RoleName: publisher-${self:custom.region}-lambda-role
   AssumeRolePolicyDocument: ${file(config/permissions/assume-role.yml)}
   Policies:
-    - PolicyName: publisher-eu-west-1-policy
+    - PolicyName: publisher-${self:custom.region}-policy
       PolicyDocument:
         Version: '2012-10-17'
         Statement:
