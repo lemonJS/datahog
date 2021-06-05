@@ -41,3 +41,10 @@ $ sls deploy
 |lib|Shared application code
 |tests|All of the tests and their helpers
 |types|Common TypeScript types that are shared amonst the Api 
+
+### Endpoints
+|Method|Endpoint|Description|Schema|
+-------|--------|-----------|-------
+POST|`https://datahog.lemonjs.uk/collect`|Submit the provider and callback url to asynchronously fetch bill data|[json](https://github.com/lemonJS/datahog/blob/main/functions/publisher/schema.json)
+GET|`https://datahog.lemonjs.uk/providers/:id`|Get bill data for a given provider|N/A
+
