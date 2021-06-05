@@ -3,7 +3,7 @@ import { SQS } from 'aws-sdk';
 import { Collection } from '../types/collection';
 
 const logger = pino();
-const { COLLECTIONS_QUEUE_NAME, BACKOFF_MULTIPLIER } = process.env;
+const { COLLECTIONS_QUEUE_NAME, BACKOFF_MULTIPLIER, REGION } = process.env;
 
 export class Queue {
   /**
@@ -14,7 +14,7 @@ export class Queue {
    * @return {Promise<void>}
    */
   public static async add(collection: Collection): Promise<void> {
-    const client = new SQS({ region: 'eu-west-1' });
+    const client = new SQS({ region: REGION as string });
 
     const delay = (collection.attempt || 0) * Number(BACKOFF_MULTIPLIER);
 
