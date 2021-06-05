@@ -14,17 +14,17 @@ describe('Queue', () => {
   describe('.add', () => {
     describe.each`
       attempt | expected
-      ${0}    | ${10}
-      ${1}    | ${20}
-      ${2}    | ${40}
-      ${3}    | ${80}
-      ${4}    | ${160}
-      ${5}    | ${320}
-      ${6}    | ${640}
-      ${7}    | ${1280}
-      ${8}    | ${2560}
-      ${9}    | ${5120}
-      ${10}   | ${10240}
+      ${0}    | ${0}
+      ${1}    | ${90}
+      ${2}    | ${180}
+      ${3}    | ${270}
+      ${4}    | ${360}
+      ${5}    | ${450}
+      ${6}    | ${540}
+      ${7}    | ${630}
+      ${8}    | ${720}
+      ${9}    | ${810}
+      ${10}   | ${900}
     `('Queueing messages with $attempt attempts', ({ attempt, expected }) => {
       const collection = createCollection({ attempt });
 
@@ -45,7 +45,7 @@ describe('Queue', () => {
       expect(stub).toHaveBeenCalledWith({
         QueueUrl: COLLECTIONS_QUEUE_NAME as string,
         MessageBody: JSON.stringify(collection),
-        DelaySeconds: 10,
+        DelaySeconds: 0,
       });
     });
   });

@@ -16,7 +16,7 @@ export class Queue {
   public static async add(collection: Collection): Promise<void> {
     const client = new SQS({ region: 'eu-west-1' });
 
-    const delay = 2 ** (collection.attempt || 0) * Number(BACKOFF_MULTIPLIER);
+    const delay = (collection.attempt || 0) * Number(BACKOFF_MULTIPLIER);
 
     const params: SQS.SendMessageRequest = {
       QueueUrl: COLLECTIONS_QUEUE_NAME as string,
@@ -24,7 +24,7 @@ export class Queue {
       DelaySeconds: delay,
     };
   
-    logger.debug({ msg: 'Adding collection payload to SQS', params });
+    logger.info({ msg: 'Adding collection payload to SQS', params });
   
     await client.sendMessage(params).promise();
   }

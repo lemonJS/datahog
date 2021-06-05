@@ -10,6 +10,9 @@ provider:
   lambdaHashingVersion: 20201221
   environment:
     NODE_OPTIONS: '--enable-source-maps=true'
+    COLLECTIONS_QUEUE_NAME: https://sqs.eu-west-1.amazonaws.com/404356446913/collections
+    BACKOFF_MULTIPLIER: 90
+    PROVIDER_API_BASE_URL: ''
   
 plugins:
   - serverless-plugin-typescript
