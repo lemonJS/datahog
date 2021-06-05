@@ -16,7 +16,7 @@ describe('Handling events in the publisher Lambda', () => {
 
     expect(response).toEqual({
       statusCode: 202,
-      body: JSON.stringify({ status: 'Accepted' }),
+      body: JSON.stringify({ message: 'Accepted' }),
     });
   });
 
