@@ -10,7 +10,7 @@ Shoud the message fail to be handled after a given amount of attempts, an error 
 
 Cloudwatch alarms can be configured for both error scenarios as these will likely require human involvement.
 
-TODO: Insert diagram
+![Option 1](https://github.com/lemonJS/datahog/blob/main/docs/option-1.png?raw=true)
 
 ### Option 2
 
@@ -35,7 +35,7 @@ const { Items } = await client.query(params).promise();
 
 Should the attempt to call the provider fail, the Lambda will update the item and increate the `attemptAfter` value exponentially so that it will be picked up another time.
 
-TODO: Insert diagram
+![Option 2](https://github.com/lemonJS/datahog/blob/main/docs/option-2.png?raw=true)
 
 ### Decision
 
