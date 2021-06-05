@@ -6,3 +6,14 @@ Resources:
     Type: AWS::SQS::Queue
     Properties:
       QueueName: collections
+      RedrivePolicy:
+        maxReceiveCount: 10
+        deadLetterTargetArn: 
+          Fn::GetAtt:
+            - collectionsDeadLetterQueue
+            - Arn
+
+  collectionsDeadLetterQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: collections-dlq

@@ -5,6 +5,10 @@
   "repository": "git@github.com:lemonJS/datahog.git",
   "author": "Lewis Monteith <lewismonteith@gmail.com>",
   "license": "MIT",
+  "dependencies": {
+    "node-fetch": "^2.6.1",
+    "pino": "^6.11.3"
+  },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.77",
     "@types/chance": "^1.1.2",
@@ -23,9 +27,5 @@
   },
   "scripts": {
     "test": "jest"
-  },
-  "dependencies": {
-    "node-fetch": "^2.6.1",
-    "pino": "^6.11.3"
   }
 }
