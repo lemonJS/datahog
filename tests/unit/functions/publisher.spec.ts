@@ -1,6 +1,6 @@
 import Chance from 'chance';
-import { invokeLocalLambda } from '../utils';
-import { Queue } from '../../lib/queue';
+import { invokeLocalLambda } from '../../utils';
+import { Queue } from '../../../lib/queue';
 import type { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 
 const chance = Chance();

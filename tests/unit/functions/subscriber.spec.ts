@@ -1,8 +1,8 @@
 import Chance from 'chance';
 import type { SQSEvent } from 'aws-lambda';
-import { invokeLocalLambda } from '../utils';
-import { Http } from '../../lib/http';
-import { Queue } from '../../lib/queue';
+import { invokeLocalLambda } from '../../utils';
+import { Http } from '../../../lib/http';
+import { Queue } from '../../../lib/queue';
 
 const chance = Chance();
 
