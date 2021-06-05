@@ -31,15 +31,15 @@ export class Http {
     const response = await fetch(this.billUrl);
 
     if (!response.ok) {
-      logger.warn({ 
-        msg: 'Bill provider unavailable', 
-        collection: this.collection, 
-        error: await response.text(),
-      });
-      throw new BillProviderUnavailableError();
+      logger.warn({ msg: 'Bill provider unavailable', collection: this.collection });
+      throw new BillProviderUnavailableError(response.statusText);
     }
 
-    return response.json();
+    const bills = response.json();
+
+    logger.info({ msg: 'Fetched bill information', collection: this.collection, bills })
+
+    return bills;
   }
 
   /**
@@ -56,22 +56,14 @@ export class Http {
     });
 
     if (!response.ok) {
-      logger.warn({ 
-        msg: 'Callback URL unavailable', 
-        collection: this.collection, 
-        error: await response.text(),
-      });
-      throw new CallbackUrlUnavailableError();
+      logger.warn({ msg: 'Callback URL unavailable', collection: this.collection });
+      throw new CallbackUrlUnavailableError(response.statusText);
     }
 
-    logger.info({ 
-      msg: 'Bill data called back successfully',
-      collection: this.collection,
-      bills,
-    });
+    logger.info({ msg: 'Bill data called back successfully', collection: this.collection, bills });
   }
 
   private get billUrl() {
-    return `${PROVIDER_API_BASE_URL}/${this.collection.provider}`;
+    return `${PROVIDER_API_BASE_URL}/providers/${this.collection.provider}`;
   }
 }

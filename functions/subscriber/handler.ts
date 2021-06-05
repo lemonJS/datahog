@@ -31,7 +31,7 @@ export const handle = async (event: SQSEvent): Promise<void> => {
     const http = new Http(collection);
     await http.handleBillCollection();
   } catch(error) {
-    logger.error({ msg: 'Failed to process collection', collection, error });
+    logger.error({ msg: 'Failed to process collection', collection, error: error.stack });
 
     // Attempt is not always defined so it needs to be guarded against
     collection.attempt = collection.attempt 

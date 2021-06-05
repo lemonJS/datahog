@@ -1468,7 +1468,7 @@ aws-sdk-mock@^5.1.0:
     sinon "^9.0.1"
     traverse "^0.6.6"
 
-aws-sdk@^2.637.0, aws-sdk@^2.922.0:
+aws-sdk@^2.637.0, aws-sdk@^2.756.0, aws-sdk@^2.922.0:
   version "2.922.0"
   resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.922.0.tgz#4568be067dceaaeda5d2d5a7e2f22666687f0b32"
   integrity sha512-SufbR5TTCK94Zk/xIv4v/m0MM9z+KW999XnjXOyNWGFGHP9/FArjtHtq69+a3KpohYBR1dBj8wUhVjbClmQIBA==
@@ -5966,6 +5966,14 @@ semver@^6.0.0, semver@^6.1.1, semver@^6.2.0, semver@^6.3.0:
   version "6.3.0"
   resolved "https://registry.yarnpkg.com/semver/-/semver-6.3.0.tgz#ee0a64c8af5e8ceea67687b133761e1becbd1d3d"
   integrity sha512-b39TBaTSfV6yBrapU89p5fKekE2m/NwnDocOVruQFS1/veMgdzuPcnOM34M6CwxW8jH/lxEa5rBoDeUwu5HHTw==
+
+serverless-domain-manager@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/serverless-domain-manager/-/serverless-domain-manager-5.1.0.tgz#44c975b4adeac6b32507c92313ee001735d56c55"
+  integrity sha512-uGLGr9nWTupimWxVwz/2S/fK+YULsg8hQ0ZddS1DNerzctIVQBXVbLMGUJv34a9a5HV0YPvVqCA/JBNI7VOSvA==
+  dependencies:
+    aws-sdk "^2.756.0"
+    chalk "^4.1.0"
 
 serverless-plugin-typescript@^1.1.9:
   version "1.1.9"

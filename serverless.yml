@@ -10,14 +10,28 @@ provider:
   lambdaHashingVersion: 20201221
   environment:
     NODE_OPTIONS: '--enable-source-maps=true'
-    COLLECTIONS_QUEUE_NAME: https://sqs.eu-west-1.amazonaws.com/404356446913/collections
     BACKOFF_MULTIPLIER: 90
-    PROVIDER_API_BASE_URL: ''
+    PROVIDER_API_BASE_URL: 'https://datahog.lemonjs.uk'
+    COLLECTIONS_QUEUE_NAME: https://sqs.eu-west-1.amazonaws.com/404356446913/collections
   
 plugins:
   - serverless-plugin-typescript
+  - serverless-domain-manager
+
+custom:
+  customDomain:
+    domainName: datahog.lemonjs.uk
+    apiType: rest
 
 functions:
+  providers:
+    handler: functions/providers/handler.handle
+    memorySize: 128
+    events:
+      - http:
+          path: /providers/{id}
+          method: get
+
   publisher:
     handler: functions/publisher/handler.handle
     role: publisherRole
