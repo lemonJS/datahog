@@ -17,6 +17,6 @@ export const handle = async (event: APIGatewayProxyEvent): Promise<APIGatewayPro
 
   return {
     statusCode: 202,
-    body: JSON.stringify({ message: 'Accepted' }),
+    body: JSON.stringify({ message: 'Accepted' })
   };
 };

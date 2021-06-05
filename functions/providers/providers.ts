@@ -14,7 +14,7 @@ export const providers: Providers = {
     {
       billedOn: "2020-05-07T15:03:14.257Z",
       amount: 30.00,
-    },
+    }
   ],
   internet: [
     {
@@ -24,6 +24,6 @@ export const providers: Providers = {
     {
       billedOn: "2020-03-07T15:03:14.257Z",
       amount: 15.12,
-    },
-  ],
+    }
+  ]
 };

@@ -15,7 +15,7 @@ export const handle = async (event: APIGatewayProxyEvent): Promise<APIGatewayPro
   if (Math.random() > 1 - FAILURE_PROBABILITY) {
     return {
       statusCode: 500,
-      body: '#fail',
+      body: '#fail'
     };
   }
 
@@ -23,6 +23,6 @@ export const handle = async (event: APIGatewayProxyEvent): Promise<APIGatewayPro
 
   return {
     statusCode: bills ? 200 : 404,
-    body: JSON.stringify(bills),
+    body: JSON.stringify(bills)
   }
 };

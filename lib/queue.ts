@@ -21,7 +21,7 @@ export class Queue {
     const params: SQS.SendMessageRequest = {
       QueueUrl: COLLECTIONS_QUEUE_NAME as string,
       MessageBody: JSON.stringify(collection),
-      DelaySeconds: delay,
+      DelaySeconds: delay
     };
   
     logger.info({ msg: 'Adding collection payload to SQS', params });

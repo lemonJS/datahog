@@ -37,7 +37,7 @@ export class Http {
 
     const bills = response.json();
 
-    logger.info({ msg: 'Fetched bill information', collection: this.collection, bills })
+    logger.info({ msg: 'Fetched bill information', collection: this.collection, bills });
 
     return bills;
   }
@@ -52,7 +52,7 @@ export class Http {
   private async callbackBillData(bills: Bill[]): Promise<void> {
     const response = await fetch(this.collection.callbackUrl, {
       method: 'POST',
-      body: JSON.stringify(bills),
+      body: JSON.stringify(bills)
     });
 
     if (!response.ok) {
