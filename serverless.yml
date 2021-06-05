@@ -26,6 +26,9 @@ functions:
       - http:
           path: /collect
           method: post
+          request:
+            schemas:
+              application/json: ${file(functions/publisher/schema.json)}
 
   subscriber:
     handler: functions/subscriber/handler.handle

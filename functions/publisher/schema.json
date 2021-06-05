@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "title": "Publisher request schema",
+  "required": [
+    "provider",
+    "callbackUrl"
+  ],
+  "properties": {
+    "provider": {
+      "type": "string",
+      "enum": [
+        "gas",
+        "internet"
+      ]
+    },
+    "callbackUrl": {
+      "type": "string",
+      "format": "uri"
+    }
+  }
+}

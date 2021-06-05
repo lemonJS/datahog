@@ -23,14 +23,15 @@ export const handle = async (event: SQSEvent): Promise<void> => {
   // operate on the 0th item
   const collection = <Collection>JSON.parse(event.Records[0]!.body);
   
-  logger.debug({ msg: 'Processing collection', collection });
+  logger.info({ msg: 'Processing collection', collection });
 
   try {
     // Get the list of bills using the provider from the collection,
     // and send them to the callbackUrl. Either of these can be flaky!
-    await new Http(collection).handleBillCollection();
+    const http = new Http(collection);
+    await http.handleBillCollection();
   } catch(error) {
-    logger.error({ msg: 'Failed to process collection', collection });
+    logger.error({ msg: 'Failed to process collection', collection, error });
 
     // Attempt is not always defined so it needs to be guarded against
     collection.attempt = collection.attempt 
