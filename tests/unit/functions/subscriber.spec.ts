@@ -1,18 +1,14 @@
-import Chance from 'chance';
 import type { SQSEvent } from 'aws-lambda';
-import { invokeLocalLambda } from '../../utils';
+import { invokeLocalLambda, createCollection } from '../../utils';
 import { Http } from '../../../lib/http';
 import { Queue } from '../../../lib/queue';
+import { MaxAttemptsReachedError } from '../../../lib/errors';
 
-const chance = Chance();
 const { MAX_BACKOFF_ATTEMPTS } = process.env;
 
 describe('Processing messages from the SQS queue', () => {
   describe('when the `handleBillCollection` method fails', () => {
-    const collection = {
-      provider: chance.pickone(['gas', 'electric']),
-      callbackUrl: chance.url(),
-    };
+    const collection = createCollection();
     
     const event = { Records: [{ body: JSON.stringify(collection) }] } as SQSEvent;
 
@@ -32,11 +28,7 @@ describe('Processing messages from the SQS queue', () => {
   });
 
   describe('when too many attempts have been made and there is an error', () => {
-    const collection = {
-      provider: chance.pickone(['gas', 'electric']),
-      callbackUrl: chance.url(),
-      attempt: Number(MAX_BACKOFF_ATTEMPTS),
-    };
+    const collection = createCollection({ attempt: Number(MAX_BACKOFF_ATTEMPTS) });
     
     const event = { Records: [{ body: JSON.stringify(collection) }] } as SQSEvent;
 
@@ -50,7 +42,7 @@ describe('Processing messages from the SQS queue', () => {
 
     it('the error is not caught', async () => {
       expect(invokeLocalLambda<SQSEvent, void>('subscriber', event))
-        .rejects.toThrowError('Max attempts reached');
+        .rejects.toThrowError(MaxAttemptsReachedError);
     });
 
     it('does not add the message back onto the queue', async () => {
@@ -61,10 +53,7 @@ describe('Processing messages from the SQS queue', () => {
   });
 
   describe('when the data is fetched and called back successfully', () => {
-    const collection = {
-      provider: chance.pickone(['gas', 'electric']),
-      callbackUrl: chance.url(),
-    };
+    const collection = createCollection();
 
     const event = { Records: [{ body: JSON.stringify(collection) }] } as SQSEvent;
 

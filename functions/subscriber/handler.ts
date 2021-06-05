@@ -1,6 +1,7 @@
 import { SQSEvent } from 'aws-lambda';
 import { Queue } from '../../lib/queue';
 import { Http } from '../../lib/http';
+import { MaxAttemptsReachedError } from '../../lib/errors';
 import type { Collection } from '../../types/collection';
 
 const { MAX_BACKOFF_ATTEMPTS } = process.env;
@@ -35,7 +36,7 @@ export const handle = async (event: SQSEvent): Promise<void> => {
       : 1;
 
     if (collection.attempt > Number(MAX_BACKOFF_ATTEMPTS)) {
-      throw new Error('Max attempts reached');
+      throw new MaxAttemptsReachedError();
     }
     
     await Queue.add(collection);

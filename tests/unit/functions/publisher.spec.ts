@@ -1,15 +1,9 @@
-import Chance from 'chance';
-import { invokeLocalLambda } from '../../utils';
+import { invokeLocalLambda, createCollection } from '../../utils';
 import { Queue } from '../../../lib/queue';
 import type { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 
-const chance = Chance();
-
 describe('Handling events in the publisher Lambda', () => {
-  const collection = {
-    provider: chance.pickone(['gas', 'electric']),
-    callbackUrl: chance.url(),
-  };
+  const collection = createCollection();
 
   const event = { body: JSON.stringify(collection) } as APIGatewayProxyEvent;
 

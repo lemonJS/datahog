@@ -1,9 +1,7 @@
-import Chance from 'chance';
 import { Queue } from '../../../lib/queue';
-import { stubSqsSendMessage } from '../../utils';
+import { stubSqsSendMessage, createCollection } from '../../utils';
 import { Collection } from '../../../types/collection';
 
-const chance = Chance();
 const { COLLECTIONS_QUEUE_NAME } = process.env;
 
 describe('Queue', () => {
@@ -28,11 +26,7 @@ describe('Queue', () => {
       ${9}    | ${5120}
       ${10}   | ${10240}
     `('Queueing messages with $attempt attempts', ({ attempt, expected }) => {
-      const collection = {
-        provider: '',
-        callbackUrl: '',
-        attempt,
-      };
+      const collection = createCollection({ attempt });
 
       it('uses the correct delay amount', async () => {
         await Queue.add(collection as Collection);
@@ -44,12 +38,9 @@ describe('Queue', () => {
     });
 
     it('includes the payload in the event body', async () => {
-      const collection = {
-        provider: chance.pickone(['gas', 'electric']),
-        callbackUrl: chance.url()
-      };
+      const collection = createCollection();
 
-      await Queue.add(collection as Collection);
+      await Queue.add(collection);
 
       expect(stub).toHaveBeenCalledWith({
         QueueUrl: COLLECTIONS_QUEUE_NAME as string,
