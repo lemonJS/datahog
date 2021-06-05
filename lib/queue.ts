@@ -1,6 +1,8 @@
+import pino from 'pino';
 import { SQS } from 'aws-sdk';
 import { Collection } from '../types/collection';
 
+const logger = pino();
 const { COLLECTIONS_QUEUE_NAME, BACKOFF_MULTIPLIER } = process.env;
 
 export class Queue {
@@ -22,7 +24,7 @@ export class Queue {
       DelaySeconds: delay,
     };
   
-    console.debug({ msg: 'Adding collection payload to SQS', params });
+    logger.debug({ msg: 'Adding collection payload to SQS', params });
   
     await client.sendMessage(params).promise();
   }

@@ -10,6 +10,7 @@
     "@types/chance": "^1.1.2",
     "@types/jest": "^26.0.23",
     "@types/node-fetch": "^2.5.10",
+    "@types/pino": "^6.3.8",
     "aws-sdk": "^2.922.0",
     "aws-sdk-mock": "^5.1.0",
     "chance": "^1.1.7",
@@ -23,6 +24,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^2.6.1",
+    "pino": "^6.11.3"
   }
 }
